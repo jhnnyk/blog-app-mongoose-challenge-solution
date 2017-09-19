@@ -103,4 +103,28 @@ describe('BlogPost API resource', function () {
         })
     })
   })
+
+  describe('POST endpoint', function () {
+    it('should add a new blog post', function () {
+      const newBlogPost = generateBlogPostData()
+
+      return chai.request(app)
+        .post('/posts')
+        .send(newBlogPost)
+        .then(function (res) {
+          res.should.have.status(201)
+          res.should.be.json
+          res.body.should.be.a('object')
+          res.body.should.include.keys('id', 'title', 'content', 'author', 'created')
+          res.body.title.should.equal(newBlogPost.title)
+          res.body.id.should.not.be.null
+          res.body.content.should.equal(newBlogPost.content)
+          return BlogPost.findById(res.body.id)
+        })
+        .then(function (post) {
+          post.title.should.equal(newBlogPost.title)
+          post.content.should.equal(newBlogPost.content)
+        })
+    })
+  })
 })
