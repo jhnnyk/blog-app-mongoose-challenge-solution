@@ -7,4 +7,6 @@
 * visit Heroku dashboard
   * click `Settings`, then `Reveal Config Vars`
     * create an entry for `DATABASE_URL` with the value `mongodb://<dbuser>:<dbpassword>@ds99999.mlab.com:9999/node-restaurants-app` replacing the values for your DB and DB user
-    
+
+* commit changes and push to master
+* `git push heroku master`
