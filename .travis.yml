@@ -1,4 +1,11 @@
 language: node_js
 node_js: node
 services:
-  - mongodb
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: X9yQDWT1xUPTu7MB5KiW4IG4eoMtOwenQ2g24kHWBn3+mj0lm7Yq2m/w+fruk2XFJGQ5Ells8GTnG3dhgGf1uXCQ+KE9KzNHMMi9RyxTcQpyfzRBUXLb2Pfb7VEg5c+oEFCsa1UJKogqzxihJyscUnRlO7Qep/UXztBewq99GbD6SgknEU0ZhdVtb1bNWGfhILRJGlafy79622rpEyFxYD6tw/b6uF5soAxpI2LQDXLESMFo6tpAuPIi/edwjnCfqxJk47vlWY91LJi6Ii3IDZSdpusos87fto46GhBu+Uz/+64CU4W1JZ+k4gHW/KI9FfP5tc1bgYR0wfaHRhUt7FhW6I/qGRxpmYoD23VA6G4KaqJ05oLEQqQu9ALgsbmHJdMuEcDfGCDzKWpwPRGETZmb4GWRKWfaII/DhHJzTbJlw15Jr+a6AUSmhC/uUElVkvVM+XmXMnairCbftEiFFmpT/Ora2xU3tkdlTFTxLRdqNJHhRBdBZyHxb79WMXifHYS8/On4G2pMvHQVidguH3tMN8SLZ9YH5eiCYY24n4QZ2fMTzBZGkajCIskoZt6hYVcpDV2kxskJce6INhiS4QeCd8im0+e7Q1+6W+dvXiUL6/KiEXthj3WKi6RQ6bP/KzQCPVaLKb3mp9duhuU+/uwN88vGEq80cji1KJtonUg=
+  app: shrouded-island-23011
+  on:
+    repo: jhnnyk/blog-app-mongoose-challenge-solution
