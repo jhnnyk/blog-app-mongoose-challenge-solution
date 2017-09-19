@@ -77,5 +77,30 @@ describe('BlogPost API resource', function () {
           res.body.posts.should.have.lengthOf(count)
         })
     })
+
+    it('should return blog posts with the right fields', function () {
+      let resBlogPost
+      return chai.request(app)
+        .get('/posts')
+        .then(function (res) {
+          res.should.have.status(200)
+          res.should.be.json
+          res.body.posts.should.be.a('array')
+          res.body.posts.should.have.length.of.at.least(1)
+
+          res.body.posts.forEach(function (post) {
+            post.should.be.a('object')
+            post.should.include.keys('id', 'title', 'content', 'author', 'created')
+          })
+
+          resBlogPost = res.body.posts[0]
+          return BlogPost.findById(resBlogPost.id)
+        })
+        .then(function (post) {
+          resBlogPost.id.should.equal(post.id)
+          resBlogPost.title.should.equal(post.title)
+          resBlogPost.content.should.equal(post.content)
+        })
+    })
   })
 })
