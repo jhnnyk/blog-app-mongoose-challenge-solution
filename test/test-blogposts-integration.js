@@ -127,4 +127,52 @@ describe('BlogPost API resource', function () {
         })
     })
   })
+
+  describe('PUT endpoint', function () {
+    it('should update fields you send over', function () {
+      const updateData = {
+        title: 'Falalalala',
+        content: 'Bananas. Lots of bananas!'
+      }
+
+      return BlogPost
+        .findOne()
+        .then(function (post) {
+          updateData.id = post.id
+
+          return chai.request(app)
+            .put(`/posts/${post.id}`)
+            .send(updateData)
+        })
+        .then(function (res) {
+          res.should.have.status(204)
+          return BlogPost.findById(updateData.id)
+        })
+        .then(function (post) {
+          post.title.should.equal(updateData.title)
+          post.content.should.equal(updateData.content)
+        })
+    })
+  })
+
+  describe('DELETE endpoint', function () {
+    it('deletes a blog post by id', function () {
+      let post
+
+      return BlogPost
+        .findOne()
+        .then(function (_post) {
+          post = _post
+          return chai.request(app)
+            .delete(`/posts/${post.id}`)
+        })
+        .then(function (res) {
+          res.should.have.status(204)
+          return BlogPost.findById(post.id)
+        })
+        .then(function (_restaurant) {
+          should.not.exist(_restaurant)
+        })
+    })
+  })
 })
